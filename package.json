@@ -1,0 +1,19 @@
+{
+  "name": "simple-firebase",
+  "version": "1.0.0",
+  "description": "Firebase realtime database with much simpler syntax.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n3oney/simple-firebase.git"
+  },
+  "author": "n3oney",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n3oney/simple-firebase/issues"
+  },
+  "homepage": "https://github.com/n3oney/simple-firebase#readme"
+}
