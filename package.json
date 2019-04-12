@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/n3oney/simple-firebase/issues"
   },
-  "homepage": "https://github.com/n3oney/simple-firebase#readme"
+  "homepage": "https://github.com/n3oney/simple-firebase#readme",
+  "dependencies": {
+    "firebase": "^5.9.4"
+  }
 }
