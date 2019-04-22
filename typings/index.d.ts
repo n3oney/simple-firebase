@@ -1,3 +1,5 @@
+declare module 'simple-firebase';
+
 export class Database {
     public get(key: string): Promise<any>;
     public increment(key: string, number: number): Promise<number>;

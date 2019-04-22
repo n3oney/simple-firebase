@@ -1,6 +1,6 @@
 {
   "name": "simple-firebase",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Firebase realtime database with much simpler syntax.",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/n3oney/simple-firebase#readme",
   "dependencies": {
+    "@types/node": "^11.13.6",
     "firebase": "^5.9.4"
   }
 }
