@@ -34,37 +34,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
 exports.__esModule = true;
 var firebase = require("firebase");
-/**
- * Initializes the database
- * @param {object} config - The config from firebase.
- * @returns {promise} The database
- */
-module.exports.initializeApp = function (config) {
-    var promise1 = new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, firebase.initializeApp(config)];
-                case 1:
-                    _a.sent();
-                    module.exports.database = firebase.database();
-                    addFunctions();
-                    resolve(module.exports.database);
-                    return [2 /*return*/, promise1];
-            }
-        });
-    }); });
-    return promise1;
-};
-function addFunctions() {
-    var _this = this;
+var Database = /** @class */ (function () {
+    function Database() {
+    }
     /**
     * Gets a value from the database
     * @param {string} uri - The uri of the value.
+    * @returns {Promise<any>}
     */
-    module.exports.database.get = function (uri) {
+    Database.prototype.get = function (uri) {
+        var _this = this;
         var promise1 = new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 module.exports.database.ref(uri).once('value').then(function (value) {
@@ -76,78 +57,108 @@ function addFunctions() {
         return promise1;
     };
     /**
-    * Sets a value on the database
-    * @param {string} uri - The uri of the value.
-    * @param data - The value to set.
-    */
-    module.exports.database.set = function (uri, data) { return __awaiter(_this, void 0, void 0, function () {
-        var promise1;
-        var _this = this;
-        return __generator(this, function (_a) {
-            promise1 = new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    module.exports.database.ref(uri).set(data).then(function () {
-                        resolve(data);
-                    })["catch"](function (err) {
-                        reject(err);
+   * Sets a value on the database
+   * @param {string} uri - The uri of the value.
+   * @param data - The value to set.
+   */
+    Database.prototype.set = function (uri, data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var promise1;
+            var _this = this;
+            return __generator(this, function (_a) {
+                promise1 = new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        module.exports.database.ref(uri).set(data).then(function () {
+                            resolve(data);
+                        })["catch"](function (err) {
+                            reject(err);
+                        });
+                        return [2 /*return*/];
                     });
-                    return [2 /*return*/];
-                });
-            }); });
-            return [2 /*return*/, promise1];
+                }); });
+                return [2 /*return*/, promise1];
+            });
         });
-    }); };
+    };
     /**
     * Increments a number value on the database
     * @param {string} uri - The uri of the value.
     * @param {number} num - The number of how much to increment.
     */
-    module.exports.database.increment = function (uri, num) { return __awaiter(_this, void 0, void 0, function () {
-        var promise1;
-        var _this = this;
-        return __generator(this, function (_a) {
-            promise1 = new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                var oldValue, newValue;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            if (isNaN(num))
-                                return [2 /*return*/, reject("Second parameter has to be of type Number")];
-                            return [4 /*yield*/, module.exports.database.get(uri)];
-                        case 1:
-                            oldValue = _a.sent();
-                            if (isNaN(oldValue))
-                                return [2 /*return*/, reject("The value has to be of type Number")];
-                            newValue = oldValue + num;
-                            module.exports.database.set(uri, newValue).then(function () {
-                                resolve();
-                            });
-                            return [2 /*return*/];
-                    }
-                });
-            }); });
-            return [2 /*return*/, promise1];
+    Database.prototype.increment = function (uri, num) {
+        return __awaiter(this, void 0, void 0, function () {
+            var promise1;
+            var _this = this;
+            return __generator(this, function (_a) {
+                promise1 = new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                    var oldValue, newValue;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (isNaN(num))
+                                    return [2 /*return*/, reject("Second parameter has to be of type Number")];
+                                return [4 /*yield*/, module.exports.database.get(uri)];
+                            case 1:
+                                oldValue = _a.sent();
+                                if (isNaN(oldValue))
+                                    return [2 /*return*/, reject("The value has to be of type Number")];
+                                newValue = oldValue + num;
+                                module.exports.database.set(uri, newValue).then(function () {
+                                    resolve();
+                                });
+                                return [2 /*return*/];
+                        }
+                    });
+                }); });
+                return [2 /*return*/, promise1];
+            });
         });
-    }); };
+    };
     /**
     * Removes a value from the database
     * @param {string} uri - The uri of the value.
     */
-    module.exports.database["delete"] = function (uri) { return __awaiter(_this, void 0, void 0, function () {
-        var promise1;
-        var _this = this;
-        return __generator(this, function (_a) {
-            promise1 = new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    module.exports.database.ref(uri).set(null).then(function () {
-                        resolve();
-                    })["catch"](function (err) {
-                        reject(err);
+    Database.prototype["delete"] = function (uri) {
+        return __awaiter(this, void 0, void 0, function () {
+            var promise1;
+            var _this = this;
+            return __generator(this, function (_a) {
+                promise1 = new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        module.exports.database.ref(uri).set(null).then(function () {
+                            resolve();
+                        })["catch"](function (err) {
+                            reject(err);
+                        });
+                        return [2 /*return*/];
                     });
-                    return [2 /*return*/];
-                });
-            }); });
-            return [2 /*return*/, promise1];
+                }); });
+                return [2 /*return*/, promise1];
+            });
         });
-    }); };
+    };
+    return Database;
+}());
+exports.Database = Database;
+/**
+ * Initializes the database
+ * @param {object} config - The config from firebase.
+ * @returns {promise} The database
+ */
+function initializeApp(config) {
+    var _this = this;
+    var promise1 = new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, firebase.initializeApp(config)];
+                case 1:
+                    _a.sent();
+                    module.exports.database = firebase.database();
+                    resolve(module.exports.database);
+                    return [2 /*return*/, promise1];
+            }
+        });
+    }); });
+    return promise1;
 }
+exports.initializeApp = initializeApp;
